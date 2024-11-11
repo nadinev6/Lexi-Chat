@@ -1,0 +1,20 @@
+runtime: python
+env: flex
+entrypoint: gunicorn -b :$PORT main:app
+
+runtime_config:
+    operating_system: "ubuntu22"
+    runtime_version: "3.12"
+
+manual_scaling:
+  instances: 1 
+
+readiness_check:
+  app_start_timeout_sec: 1000 
+
+resources:
+  disk_size_gb: 15  # Increase disk size to 10GB 
+
+env_variables:
+  BUCKET_NAME: ai-chat-441116.appspot.com # Replace with your actual bucket name
+  DATASET_PATH: datasets/awesome-chatgpt-prompts/awesome-prompts.txt # Path to your dataset in the bucket
